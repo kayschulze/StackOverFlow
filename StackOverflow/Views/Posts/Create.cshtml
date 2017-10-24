@@ -1,0 +1,22 @@
+﻿@model StackOverflow.Models.Post
+
+@{
+    ViewData["Title"] = "Create Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Post</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Question)
+    @Html.EditorFor(model => model.Question)
+
+    @Html.LabelFor(model => model.ContentBody)
+    @Html.TextBoxFor(model => model.ContentBody)
+
+    <input type="submit" value="Create" class="btn btn-default" />
+}
+
+@Html.ActionLink("Back to All Posts", "Index")
