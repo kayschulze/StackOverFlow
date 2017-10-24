@@ -1,0 +1,22 @@
+﻿@model IEnumerable<BasicAuthentication.Models.Post>
+
+<h2>@User.Identity.Name:  Here are your posts:</h2>
+
+<hr />
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var post in Model)
+	    {
+            <li>@Html.DisplayFor(modelPost => post.Question)</li>
+	    }
+    </ul>
+}
+else
+{
+    <p>You have no active Posts!</p>
+    <p>Consider creating a new post if you have a question.</p>
+}
+
+@Html.ActionLink("Create new", "Create")

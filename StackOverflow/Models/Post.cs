@@ -9,6 +9,7 @@ namespace StackOverflow.Models
     {
         [Key]
         public int PostId { get; set; }
+        public string Question { get; set; }
         public string ContentBody { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual List<Answer> Answers { get; set; }
