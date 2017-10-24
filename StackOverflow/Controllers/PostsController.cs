@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using StackOverflow.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,6 +35,14 @@ namespace StackOverflow.Controllers
             return View();
         }
 
+        public IActionResult Details(int Id)
+        {
+            var thisPost = _db.Posts.Include(x => x.Answers)
+                              .ThenInclude(r => r.User)
+                              .FirstOrDefault(x => x.PostId == Id);
+            return View(thisPost);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(Post post)
         {
@@ -42,7 +51,12 @@ namespace StackOverflow.Controllers
             post.User = currentUser;
             _db.Posts.Add(post);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new {Id = post.PostId});
+        }
+
+        public IActionResult NewAnswer()
+        {
+            return View();
         }
 
     }

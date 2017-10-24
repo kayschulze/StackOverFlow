@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "New Answer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Security.Claims
+
+<h2>Contribute an Answer</h2>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.ContentBody)
+    @Html.EditFor(model => model.ContentBody)
+
+
+}
